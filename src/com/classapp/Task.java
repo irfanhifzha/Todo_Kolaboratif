@@ -1,47 +1,27 @@
 package com.classapp;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public abstract class Task {
+    private int idTask;
+    private String title;
+    private String description;
 
-    protected int idTask;
-    protected String title;
-    protected String description;
-
-    protected Task(String title, String description) {
+    public Task(String title, String description) {
         this.title = title;
         this.description = description;
     }
+    public Task(String title) {
+        this.title = title;
+        this.description = "";
+    }
 
-    /** The table this concrete task type is stored in - used by editTask/deleteTask below. */
-    protected abstract String tableName();
-
+    public void setIdTask(int idTask) {this.idTask = idTask;}
+    public void setTitle(String title) {this.title = title;}
+    public void setDesc(String description) {this.description = description;}
     public void editTask(String title, String description) {
-        String sql = "UPDATE " + tableName() + " SET title = ?, description = ? WHERE id = ?";
-        try (PreparedStatement ps = Database.get().prepareStatement(sql)) {
-            ps.setString(1, title);
-            ps.setString(2, description);
-            ps.setInt(3, idTask);
-            ps.executeUpdate();
-            this.title = title;
-            this.description = description;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+        this.title = title; this.description = description;
+    } 
 
-    public void deleteTask() {
-        String sql = "DELETE FROM " + tableName() + " WHERE id = ?";
-        try (PreparedStatement ps = Database.get().prepareStatement(sql)) {
-            ps.setInt(1, idTask);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public int getIdTask() { return idTask; }
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
+    public int getIdTask() {return idTask;}
+    public String getTitle() {return title;}
+    public String getDescription() {return description;}
 }

@@ -1,5 +1,4 @@
 package com.classapp;
-// import java.util.*;
 
 public class User {
     private int idUser;
@@ -7,12 +6,8 @@ public class User {
     private String username;
     private String password;
 
-    // private List<Membership> memberships; -> doesnt makes sense, karna user ga perlu tau membership. hanya membership tau user sehingga ada koneksi dot product thingy
-
     public User(int idUser, String name, String username, String password) {
-        this.idUser = idUser; this.name = name; 
-        this.username = username; this.password = password;
-        // this.memberships = new ArrayList<>(); // init kosong dulu
+        this.name = name; this.username = username; this.password = password;
     }
     
     public void setIdUser(int idUser) {this.idUser = idUser;}
@@ -24,13 +19,4 @@ public class User {
     public String getName() {return name;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
-
-    // public void addMembership(Membership membership) {
-    //     memberships.add(membership);
-    // }
-
-    // public void removeMembership(Membership membership) {
-    //     memberships.remove(membership);
-    // }
-
 }
