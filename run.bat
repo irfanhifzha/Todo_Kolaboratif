@@ -1,21 +1,15 @@
 @echo off
+REM Runs the app without Maven. Run compile.bat first.
+
 setlocal
 
-REM Create output directory if it doesn't exist
-if not exist out mkdir out
+REM Change to the directory containing this script
+cd /d "%~dp0"
 
-REM Compile Java source files
-dir /s /b src\*.java > sources.txt
-javac -cp "lib\sqlite-jdbc-3.53.2.0.jar" -d out @sources.txt
+java -cp "out;lib\sqlite-jdbc-3.36.0.3.jar" com.classapp.Main
 
 if errorlevel 1 (
-    del sources.txt
+    echo.
+    echo Application exited with an error.
     exit /b %errorlevel%
 )
-
-del sources.txt
-
-REM Run the application
-java -cp "out;lib\sqlite-jdbc-3.53.2.0.jar" com.classapp.Main
-
-endlocal

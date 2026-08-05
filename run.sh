@@ -1,6 +1,6 @@
-#!/bin/bash
-# Compiles (if needed) and runs the Class App.
+#!/usr/bin/env bash
+# Runs the app without Maven. Run ./compile.sh first.
 set -e
-mkdir -p out
-javac -cp lib/sqlite-jdbc-3.53.2.0.jar -d out $(find src -name "*.java")
-java -cp "out:lib/sqlite-jdbc-3.53.2.0.jar" com.classapp.Main
+cd "$(dirname "$0")"
+
+java -cp "out:lib/sqlite-jdbc-3.36.0.3.jar" com.classapp.Main
