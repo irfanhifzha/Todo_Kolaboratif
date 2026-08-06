@@ -1,3 +1,4 @@
 out/
 classapp.db
 target/
+.DS_STORE
